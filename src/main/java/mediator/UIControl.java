@@ -1,9 +1,17 @@
 package mediator;
 
-public class UIControl {
-    protected final DialogBox owner;
+import java.util.ArrayList;
+import java.util.List;
 
-    public UIControl(DialogBox owner) {
-        this.owner = owner;
+public abstract class UIControl {
+    private final List<IEventHandler> eventHandlers = new ArrayList<>();
+    public void addEventHandler(IEventHandler eventHandler) {
+        eventHandlers.add(eventHandler);
+    }
+
+    protected void notifyEventHandlers() {
+        for (IEventHandler eventHandler: eventHandlers) {
+            eventHandler.handle();
+        }
     }
 }

@@ -1,9 +1,14 @@
 package mediator;
 
-public class ArticlesDialogBox extends DialogBox{
-    private final ListBox articlesListBox = new ListBox(this);
-    private final TextBox titleTextBox = new TextBox(this);
-    private final Button saveButton = new Button(this);
+public class ArticlesDialogBox{
+    private final ListBox articlesListBox = new ListBox();
+    private final TextBox titleTextBox = new TextBox();
+    private final Button saveButton = new Button();
+
+    public ArticlesDialogBox () {
+        articlesListBox.addEventHandler(this::articleSelected);
+        titleTextBox.addEventHandler(this::titleChanged);
+    }
 
     public void simulateUserInteraction() {
         articlesListBox.setSelection("article 1");
@@ -22,12 +27,6 @@ public class ArticlesDialogBox extends DialogBox{
 
 
 
-    }
-
-    @Override
-    public void changed(UIControl control) {
-        if (control == articlesListBox) articleSelected();
-        else if (control == titleTextBox) titleChanged();
     }
 
     private void articleSelected() {
